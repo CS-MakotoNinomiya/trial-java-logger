@@ -2,14 +2,38 @@
 <!DOCTYPE configuration>
 
 <configuration>
-	<property name="logDir" value="./logs/" />
-	<property name="fileName" value="testlog.log" />
-	<property name="format" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%20t] %-16p %c{20} %m%n" />
+	<property name="logDirA" value="./logs/a/" />
+	<property name="logDirB" value="./logs/b/" />
+	<property name="logDirC" value="./logs/c/" />
+	<property name="fileName" value="testlog" />
+	<property name="format" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%20t] %-16p %logger{20} [%file:%line] %m%n" />
 
-	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${logDir}${fileName}</file>
+	<appender name="FILE_A" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${logDirA}${fileName}.a.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${logDir}${fileName}.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<fileNamePattern>${logDirA}${fileName}.a.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>1</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${format}</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="FILE_B" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${logDirB}${fileName}.b.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${logDirB}${fileName}.b.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>1</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${format}</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="FILE_C" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${logDirC}${fileName}.c.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${logDirC}${fileName}.c.%d{yyyy-MM-dd}.log</fileNamePattern>
 			<maxHistory>1</maxHistory>
 		</rollingPolicy>
 		<encoder>
@@ -24,7 +48,17 @@
 	</appender>
 
 	<root level="TRACE">
-		<appender-ref ref="FILE" />
 		<appender-ref ref="STDOUT" />
 	</root>
+
+	<logger name="LOGGER_A" level="TRACE">
+		<appender-ref ref="FILE_A" />
+	</logger>
+	<logger name="LOGGER_B" level="TRACE">
+		<appender-ref ref="FILE_B" />
+	</logger>
+	<logger name="LOGGER_C" level="TRACE">
+		<appender-ref ref="FILE_C" />
+	</logger>
+
 </configuration>
