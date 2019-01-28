@@ -2,27 +2,24 @@
 <!DOCTYPE configuration>
 
 <configuration>
-
 	<property name="logDir" value="./logs/" />
 	<property name="fileName" value="testlog.log" />
-	<property name="format1" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%20t] %-16p %c{20} %m%n" />
+	<property name="format" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%20t] %-16p %c{20} %m%n" />
 
 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${logDir}${fileName}</file>
-
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<fileNamePattern>${logDir}${fileName}.%d{yyyy-MM-dd}.log</fileNamePattern>
 			<maxHistory>1</maxHistory>
 		</rollingPolicy>
-
 		<encoder>
-			<pattern>${format1}</pattern>
+			<pattern>${format}</pattern>
 		</encoder>
 	</appender>
 
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<pattern>${format1}</pattern>
+			<pattern>${format}</pattern>
 		</encoder>
 	</appender>
 
