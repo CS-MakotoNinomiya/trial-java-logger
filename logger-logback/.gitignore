@@ -2,3 +2,4 @@
 /target/
 /vs.code-workspace
 /*.classpath
+/.checkstyle
