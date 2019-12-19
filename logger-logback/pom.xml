@@ -5,7 +5,7 @@
   <groupId>trial</groupId>
   <artifactId>logger-logback</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>logger-logback</name>
+  <name>trial-logger-logback</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
